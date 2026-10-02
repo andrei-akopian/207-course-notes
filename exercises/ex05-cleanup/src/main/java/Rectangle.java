@@ -1,7 +1,7 @@
 /**
  * Class for a rectangle with a width and a height.
- * 
- * Contains a number of methods for manipulation of said rectangle.
+ *
+ * <p>Contains a number of methods for manipulation of said rectangle.</p>
  */
 public class Rectangle {
   private double width;
@@ -13,34 +13,40 @@ public class Rectangle {
    * @param w any double
    * @param h any double
    */
-public Rectangle(double w,double h){
+  public Rectangle(double w, double h) {
     this.width = w;
     this.height = h;
-}
+  }
 
-/**
- * Return area of rectangle.
- *
- * @return area of rectangle
- */
-public double area(){
+  /**
+   * Return area of rectangle.
+   *
+   * @return area of rectangle
+   */
+  public double area() {
     return width * height;
-}
+  }
 
-/**
- * scales the rectangle.
- * 
- * @param factor
- */
-public void scale(double factor) {
+  /**
+   * Scales the rectangle by a certain factor.
+   *
+   * @param factor by which to scale
+   */
+  public void scale(double factor) {
     width = width * factor;
     height = height * factor;
-}
+  }
 
-public boolean isLargerThan(Rectangle other){
-    if(area() > other.area())
-        return true;
-    else
-        return false;
-}
+  /**
+   * Compare whether this rectangle has a larger area than another rectangle.
+   *
+   * @param other which is the rectangle to compare against
+   */
+  public boolean isLargerThan(Rectangle other) {
+    if (area() > other.area()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
