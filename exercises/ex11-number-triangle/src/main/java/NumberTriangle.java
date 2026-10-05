@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 /**
  * Exercise (Chapter: APIs, JSON, and Files) — reading data from a file into objects.
@@ -109,7 +110,16 @@ public class NumberTriangle {
     //       value of wherever you ended up. An empty path means "stay here".
     //       Hint: String#charAt(int) and String#length() are all you need for the
     //       iterative version; a recursive version can use String#substring(1).
-    return 0;
+    if (path.length() == 0) {
+      return this.root;
+    } else {
+      char r = path.charAt(0);
+      if (r == 'r') {
+        return right.retrieve(path.substring(1));
+      } else {
+        return left.retrieve(path.substring(1));
+      }
+    }
   }
 
   /**
@@ -175,6 +185,8 @@ public class NumberTriangle {
     NumberTriangle top = null;
 
     String line = br.readLine();
+    ArrayList<NumberTriangle> parent_row = new ArrayList<NumberTriangle>();
+    int linenum = 1;
     while (line != null) {
 
       // Remove this line when you are done; it is here so that the starter code
@@ -185,9 +197,31 @@ public class NumberTriangle {
       //       this row; make a NumberTriangle for each one, then wire this row up
       //       as the children of the previous row. Remember the aliasing: the
       //       right child of one node is the left child of the next node over.
-
+      String[] parts = line.split(" ");
+      if (linenum == 1) {
+        int r = Integer.parseInt(parts[0]);
+        top =  new NumberTriangle(r);
+        parent_row.add(top);
+      } else {
+        ArrayList<NumberTriangle> child_row = new ArrayList<NumberTriangle>();
+        int i = 0;
+        for (String part : parts) {
+          int r = Integer.parseInt(part);
+          NumberTriangle child = new NumberTriangle(r);
+          if (i<=parent_row.size()-1) {
+            parent_row.get(i).left = child;
+          }
+          if (i>0) {
+            parent_row.get(i-1).right = child;
+          }
+          child_row.add(child);
+          i++;
+        }
+        parent_row = child_row;
+      }
       // read the next line
       line = br.readLine();
+      linenum++;
     }
     br.close();
     return top;
