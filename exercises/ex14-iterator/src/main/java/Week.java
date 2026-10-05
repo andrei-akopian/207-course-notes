@@ -53,7 +53,9 @@ public class Week implements Iterable<String> {
       @Override
       public String next() throws java.util.NoSuchElementException {
         if (this.hasNext()) {
-          return days[i];
+          String day = days[i];
+          i++;
+          return day;
         } else {
           throw new java.util.NoSuchElementException("No elements remain.");
         }
