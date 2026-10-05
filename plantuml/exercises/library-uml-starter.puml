@@ -22,7 +22,9 @@ hide empty members
 
 abstract class Item {
   - title : String
+  - onHold : bool;
   - catalogueNumber : String
+  - borrowLimit : int
   + getTitle() : String
   + getCatalogueNumber() : String
 }
@@ -30,15 +32,49 @@ abstract class Item {
 ' TODO: add boxes for Book and DVD. What differs between them — a whole class,
 '       or just the value of a loan-period field?
 
+class Book {}
+
+class DVD {
+}
+
+Book <- Item
+DVD <- Item
+
 ' TODO: reference-only items cannot be borrowed at all. Decide how to say that
 '       in the diagram: a subclass, or an interface (e.g. "Borrowable") that
 '       only some items realize?
 
+class Reference {
+}
+
+Reference <- Item
+
 ' TODO: add Member and Librarian. What do they have in common? Add the common
 '       supertype if you think one is warranted.
 
+class Member {
+    - number : int
+    - fee : int
+    - borrowed : ArrayList<Item>
+    + putOnHold(item: Item)
+}
+
+class Librarian {
+    + addToCatalogue(item: Item)
+    + waiveFee(member: Member)
+}
+
+Librarian <- Member
+
 ' TODO: add whatever represents a hold, and connect it to the classes that need
 '       to know about it.
+
+class Catalogue {
+    - items: ArrayList<Item>
+    + putOnHold(item: Item)
+    + logIn(number: int)
+    + addToCatalogue(item: Item)
+}
 
 ' TODO: add the arrows between all of your types.
 
