@@ -22,6 +22,8 @@ import javax.swing.SwingUtilities;
  *
  * Relevant reading: 4.1 Creating and showing a window, 4.2 Java Swing visual
  * components.
+ *
+ * Random unrelated edit.
  */
 public class RegistrationForm {
 
