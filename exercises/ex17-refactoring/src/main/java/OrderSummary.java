@@ -70,7 +70,7 @@ public class OrderSummary {
       if (itemPrices[i] >= 100.0) {
         premiumCount++;
       }
-
+    }
 
     double discount = 0.0;
     if (subtotal > MIN_SUBTOTAL_FOR_DISCOUNT) {

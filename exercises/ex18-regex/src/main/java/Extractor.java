@@ -87,7 +87,7 @@ public class Extractor {
     List<String> results = new ArrayList<>();
     Matcher matcher =  COURSE_CODE.matcher(text);
     while (matcher.find()) {
-      results.add(matcher.group('\\d{3}'));
+      results.add(matcher.group(1));
     }
     return results;
   }
